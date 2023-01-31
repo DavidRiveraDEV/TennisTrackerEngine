@@ -3,4 +3,102 @@
    uuid = "67AAFA84-FC90-4A5D-BE16-80288EC719E4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "69372888-1F1B-4DD9-9363-E588277CD9BA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TennisTrackerEngine/Score.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "addGame(forPlayer1:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "69372888-1F1B-4DD9-9363-E588277CD9BA - 8188cd5d268b0e74"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TennisTrackerEngineTests.Score.addGame(forPlayer1: Swift.Bool) -&gt; ()"
+                  moduleName = "TennisTrackerEngineTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidrivera/Documents/Development/Study/Test/TennisTrackerEngine/TennisTrackerEngine/Score.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "612">
+               </Location>
+               <Location
+                  uuid = "69372888-1F1B-4DD9-9363-E588277CD9BA - 8664b23477a59ff4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TennisTrackerEngine.Score.addGame(forPlayer1: Swift.Bool) -&gt; ()"
+                  moduleName = "TennisTrackerEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidrivera/Documents/Development/Study/Test/TennisTrackerEngine/TennisTrackerEngine/Score.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "612">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8FFDD03-5EC5-4436-8F28-F0D1E8DB59E4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TennisTrackerEngine/Score.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "shouldAddSet(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B8FFDD03-5EC5-4436-8F28-F0D1E8DB59E4 - 7253cada8a59058c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TennisTrackerEngineTests.Score.shouldAddSet(Swift.UInt8, Swift.UInt8) -&gt; Swift.Bool"
+                  moduleName = "TennisTrackerEngineTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidrivera/Documents/Development/Study/Test/TennisTrackerEngine/TennisTrackerEngine/Score.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "B8FFDD03-5EC5-4436-8F28-F0D1E8DB59E4 - 3198f8402b61fb6c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TennisTrackerEngine.Score.shouldAddSet(Swift.UInt8, Swift.UInt8) -&gt; Swift.Bool"
+                  moduleName = "TennisTrackerEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidrivera/Documents/Development/Study/Test/TennisTrackerEngine/TennisTrackerEngine/Score.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

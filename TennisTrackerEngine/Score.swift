@@ -22,10 +22,20 @@ struct Score {
         }
     }
 
+    struct Options {
+        let gamesPerSet: UInt8
+        let minDifferencePerSet: UInt8
+    }
+
+    let options: Options
     private(set) var serviceForPlayer1: Bool = true
     private(set) var pointsForPlayer1: Point = .love
     private(set) var pointsForPlayer2: Point = .love
     private(set) var sets: [[UInt8]] = [[0, 0]]
+
+    init(with options: Options) {
+        self.options = options
+    }
     
     mutating func winPoint() {
         let nextPoint: Point
@@ -63,5 +73,24 @@ struct Score {
         let gamesForPlayer1: UInt8 = games[0] + (forPlayer1 ? 1 : 0)
         let gamesForPlayer2: UInt8 = games[1] + (forPlayer1 ? 0 : 1)
         sets[sets.count - 1] = [gamesForPlayer1, gamesForPlayer2]
+        if shouldAddSet(gamesForPlayer1, gamesForPlayer2) {
+            sets.append([0, 0])
+        }
+    }
+
+    private func shouldAddSet(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) -> Bool {
+        let pointsToLose: Int8 = Int8(options.gamesPerSet) - Int8(options.minDifferencePerSet)
+        guard pointsToLose >= 0 else {
+            fatalError("gamesPerSet - minDifferencePerSet must be higher than 0. Currently: \(pointsToLose)")
+        }
+        return didPlayer1Win(gamesForPlayer1, gamesForPlayer2) || didPlayer2Win(gamesForPlayer1, gamesForPlayer2)
+    }
+
+    private func didPlayer1Win(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) -> Bool {
+        return gamesForPlayer1 == options.gamesPerSet && gamesForPlayer2 <= options.gamesPerSet - options.minDifferencePerSet
+    }
+
+    private func didPlayer2Win(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) -> Bool {
+        return gamesForPlayer2 == options.gamesPerSet && gamesForPlayer1 <= options.gamesPerSet - options.minDifferencePerSet
     }
 }
