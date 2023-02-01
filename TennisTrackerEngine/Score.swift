@@ -11,13 +11,15 @@ struct Score {
         case fifteen = 15
         case thirty = 30
         case forty = 40
+        case advantage
 
-        var nextPoint: Point {
+        func nextPoint(isAdvantage: Bool) -> Point {
             switch self {
             case .love: return .fifteen
             case .fifteen: return .thirty
             case .thirty: return .forty
-            case .forty: return .love
+            case .forty: return isAdvantage ? .advantage : .love
+            case .advantage: return .love
             }
         }
     }
@@ -25,6 +27,7 @@ struct Score {
     struct Options {
         let gamesPerSet: UInt8
         let minDifferencePerSet: UInt8
+        let advantage: Bool
     }
 
     let options: Options
@@ -33,24 +36,28 @@ struct Score {
     private(set) var pointsForPlayer2: Point = .love
     private(set) var sets: [[UInt8]] = [[0, 0]]
 
+    var isDeuce: Bool {
+        return pointsForPlayer1 == .forty && pointsForPlayer2 == .forty
+    }
+
     init(with options: Options) {
         self.options = options
     }
     
     mutating func winPoint() {
         if serviceForPlayer1 {
-            pointsForPlayer1 = pointsForPlayer1.nextPoint
+            pointsForPlayer1 = pointsForPlayer1.nextPoint(isAdvantage: options.advantage)
         } else {
-            pointsForPlayer2 = pointsForPlayer2.nextPoint
+            pointsForPlayer2 = pointsForPlayer2.nextPoint(isAdvantage: options.advantage)
         }
         addGameIfNeeded(forPlayer1: serviceForPlayer1)
     }
 
     mutating func losePoint() {
         if serviceForPlayer1 {
-            pointsForPlayer2 = pointsForPlayer2.nextPoint
+            pointsForPlayer2 = pointsForPlayer2.nextPoint(isAdvantage: options.advantage)
         } else {
-            pointsForPlayer1 = pointsForPlayer1.nextPoint
+            pointsForPlayer1 = pointsForPlayer1.nextPoint(isAdvantage: options.advantage)
         }
         addGameIfNeeded(forPlayer1: !serviceForPlayer1)
     }
@@ -64,14 +71,12 @@ struct Score {
     }
 
     private mutating func addGame(forPlayer1: Bool) {
-        guard let games = sets.last else {
-            sets = [[0, 0]]
-            return
-        }
+        let games = sets[sets.count - 1]
         let gamesForPlayer1: UInt8 = games[0] + (forPlayer1 ? 1 : 0)
         let gamesForPlayer2: UInt8 = games[1] + (forPlayer1 ? 0 : 1)
         sets[sets.count - 1] = [gamesForPlayer1, gamesForPlayer2]
         addSetIfNeeded(gamesForPlayer1, gamesForPlayer2)
+        serviceForPlayer1 = !serviceForPlayer1
     }
 
     private mutating func addSetIfNeeded(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) {
