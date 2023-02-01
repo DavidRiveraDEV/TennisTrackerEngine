@@ -38,29 +38,27 @@ struct Score {
     }
     
     mutating func winPoint() {
-        let nextPoint: Point
         if serviceForPlayer1 {
-            nextPoint = pointsForPlayer1.nextPoint
-            pointsForPlayer1 = nextPoint
+            pointsForPlayer1 = pointsForPlayer1.nextPoint
         } else {
-            nextPoint = pointsForPlayer2.nextPoint
-            pointsForPlayer1 = nextPoint
+            pointsForPlayer2 = pointsForPlayer2.nextPoint
         }
-        if nextPoint == .love {
-            addGame(forPlayer1: true)
-        }
+        addGameIfNeeded(forPlayer1: serviceForPlayer1)
     }
 
     mutating func losePoint() {
-        let nextPoint: Point
         if serviceForPlayer1 {
-            nextPoint = pointsForPlayer2.nextPoint
-            pointsForPlayer2 = nextPoint
+            pointsForPlayer2 = pointsForPlayer2.nextPoint
         } else {
-            nextPoint = pointsForPlayer1.nextPoint
-            pointsForPlayer1 = nextPoint
+            pointsForPlayer1 = pointsForPlayer1.nextPoint
         }
-        if nextPoint == .love {
+        addGameIfNeeded(forPlayer1: !serviceForPlayer1)
+    }
+
+    private mutating func addGameIfNeeded(forPlayer1: Bool) {
+        if forPlayer1 && pointsForPlayer1 == .love {
+            addGame(forPlayer1: true)
+        } else if !forPlayer1 && pointsForPlayer2 == .love {
             addGame(forPlayer1: false)
         }
     }
@@ -73,6 +71,10 @@ struct Score {
         let gamesForPlayer1: UInt8 = games[0] + (forPlayer1 ? 1 : 0)
         let gamesForPlayer2: UInt8 = games[1] + (forPlayer1 ? 0 : 1)
         sets[sets.count - 1] = [gamesForPlayer1, gamesForPlayer2]
+        addSetIfNeeded(gamesForPlayer1, gamesForPlayer2)
+    }
+
+    private mutating func addSetIfNeeded(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) {
         if shouldAddSet(gamesForPlayer1, gamesForPlayer2) {
             sets.append([0, 0])
         }
@@ -83,14 +85,14 @@ struct Score {
         guard pointsToLose >= 0 else {
             fatalError("gamesPerSet - minDifferencePerSet must be higher than 0. Currently: \(pointsToLose)")
         }
-        return didPlayer1Win(gamesForPlayer1, gamesForPlayer2) || didPlayer2Win(gamesForPlayer1, gamesForPlayer2)
+        return didPlayer1WinTheSet(gamesForPlayer1, gamesForPlayer2) || didPlayer2WinTheSet(gamesForPlayer1, gamesForPlayer2)
     }
 
-    private func didPlayer1Win(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) -> Bool {
+    private func didPlayer1WinTheSet(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) -> Bool {
         return gamesForPlayer1 == options.gamesPerSet && gamesForPlayer2 <= options.gamesPerSet - options.minDifferencePerSet
     }
 
-    private func didPlayer2Win(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) -> Bool {
+    private func didPlayer2WinTheSet(_ gamesForPlayer1: UInt8, _ gamesForPlayer2: UInt8) -> Bool {
         return gamesForPlayer2 == options.gamesPerSet && gamesForPlayer1 <= options.gamesPerSet - options.minDifferencePerSet
     }
 }

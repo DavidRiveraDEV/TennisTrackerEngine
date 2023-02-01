@@ -35,6 +35,7 @@ class ScoreTests: XCTestCase {
         let nextPoint = score.pointsForPlayer1.nextPoint
         score.winPoint()
         XCTAssertEqual(score.pointsForPlayer1, nextPoint)
+        XCTAssertEqual(score.sets, [[0, 0]])
     }
 
     func test_score_winingPoints() {
@@ -53,6 +54,7 @@ class ScoreTests: XCTestCase {
         let nextPoint = score.pointsForPlayer2.nextPoint
         score.losePoint()
         XCTAssertEqual(score.pointsForPlayer2, nextPoint)
+        XCTAssertEqual(score.sets, [[0, 0]])
     }
 
     func test_score_losingPoints() {

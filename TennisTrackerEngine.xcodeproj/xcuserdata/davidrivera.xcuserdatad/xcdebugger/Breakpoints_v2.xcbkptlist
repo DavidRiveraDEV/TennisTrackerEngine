@@ -14,8 +14,8 @@
             filePath = "TennisTrackerEngine/Score.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "addGame(forPlayer1:)"
             landmarkType = "7">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "TennisTrackerEngine/Score.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "shouldAddSet(_:_:)"
             landmarkType = "7">
             <Locations>
