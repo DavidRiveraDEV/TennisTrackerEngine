@@ -19,6 +19,10 @@
 		CD95D420298C92F900037F68 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D410298C913900037F68 /* Match.swift */; };
 		CD95D421298C92FC00037F68 /* MatchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D412298C915B00037F68 /* MatchOptions.swift */; };
 		CD95D422298C930300037F68 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D414298C917D00037F68 /* Set.swift */; };
+		CD95D424298C96FF00037F68 /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D423298C96FF00037F68 /* SetTests.swift */; };
+		CD95D426298C9C1200037F68 /* TieBreakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D425298C9C1200037F68 /* TieBreakTests.swift */; };
+		CD95D428298C9CE300037F68 /* TieBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D427298C9CE300037F68 /* TieBreak.swift */; };
+		CD95D429298C9D3500037F68 /* TieBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D427298C9CE300037F68 /* TieBreak.swift */; };
 		CDB709FA29888CE200002C96 /* TennisTrackerEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB709F129888CE100002C96 /* TennisTrackerEngine.framework */; };
 		CDB70A0A29888DC000002C96 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB70A0929888DC000002C96 /* GameTests.swift */; };
 		CDB70A0C29888E3700002C96 /* MatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB70A0B29888E3700002C96 /* MatchTests.swift */; };
@@ -42,6 +46,9 @@
 		CD95D418298C91B700037F68 /* GamePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePoint.swift; sourceTree = "<group>"; };
 		CD95D41A298C920000037F68 /* GamePointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePointTests.swift; sourceTree = "<group>"; };
 		CD95D41C298C925D00037F68 /* MatchOptionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchOptionsTests.swift; sourceTree = "<group>"; };
+		CD95D423298C96FF00037F68 /* SetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
+		CD95D425298C9C1200037F68 /* TieBreakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieBreakTests.swift; sourceTree = "<group>"; };
+		CD95D427298C9CE300037F68 /* TieBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieBreak.swift; sourceTree = "<group>"; };
 		CDB709F129888CE100002C96 /* TennisTrackerEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TennisTrackerEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB709F929888CE200002C96 /* TennisTrackerEngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TennisTrackerEngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB70A0929888DC000002C96 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
@@ -93,6 +100,7 @@
 				CD95D410298C913900037F68 /* Match.swift */,
 				CD95D412298C915B00037F68 /* MatchOptions.swift */,
 				CD95D414298C917D00037F68 /* Set.swift */,
+				CD95D427298C9CE300037F68 /* TieBreak.swift */,
 			);
 			path = TennisTrackerEngine;
 			sourceTree = "<group>";
@@ -104,6 +112,8 @@
 				CDB70A0929888DC000002C96 /* GameTests.swift */,
 				CD95D41C298C925D00037F68 /* MatchOptionsTests.swift */,
 				CDB70A0B29888E3700002C96 /* MatchTests.swift */,
+				CD95D423298C96FF00037F68 /* SetTests.swift */,
+				CD95D425298C9C1200037F68 /* TieBreakTests.swift */,
 			);
 			path = TennisTrackerEngineTests;
 			sourceTree = "<group>";
@@ -222,6 +232,7 @@
 				CD95D417298C919300037F68 /* Game.swift in Sources */,
 				CD95D419298C91B700037F68 /* GamePoint.swift in Sources */,
 				CD95D413298C915B00037F68 /* MatchOptions.swift in Sources */,
+				CD95D428298C9CE300037F68 /* TieBreak.swift in Sources */,
 				CD95D411298C913900037F68 /* Match.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,9 +244,12 @@
 				CD95D41E298C92F200037F68 /* Game.swift in Sources */,
 				CD95D422298C930300037F68 /* Set.swift in Sources */,
 				CD95D41F298C92F500037F68 /* GamePoint.swift in Sources */,
+				CD95D426298C9C1200037F68 /* TieBreakTests.swift in Sources */,
+				CD95D429298C9D3500037F68 /* TieBreak.swift in Sources */,
 				CDB70A0A29888DC000002C96 /* GameTests.swift in Sources */,
 				CDB70A0C29888E3700002C96 /* MatchTests.swift in Sources */,
 				CD95D421298C92FC00037F68 /* MatchOptions.swift in Sources */,
+				CD95D424298C96FF00037F68 /* SetTests.swift in Sources */,
 				CD95D41B298C920000037F68 /* GamePointTests.swift in Sources */,
 				CD95D420298C92F900037F68 /* Match.swift in Sources */,
 				CD95D41D298C925D00037F68 /* MatchOptionsTests.swift in Sources */,
