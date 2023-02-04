@@ -117,12 +117,12 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .forty)
     }
 
-    // MARK: - Winning single game
+    // MARK: - Winning game
 
     func test_addPointsToServer_toWin_withAdvantage() {
         var game = makeGame()
 
-        while(game.server != .sixty) {
+        (1...4).forEach { _ in
             game.addPointToServer()
         }
 
@@ -135,7 +135,7 @@ class GameTests: XCTestCase {
     func test_addPointsToServer_toWin_noAdvantage() {
         var game = makeGame(advantageEnabled: false)
 
-        while(game.server != .sixty) {
+        (1...4).forEach { _ in
             game.addPointToServer()
         }
 
@@ -148,7 +148,7 @@ class GameTests: XCTestCase {
     func test_addPointsToReceiver_toWin_withAdvantage() {
         var game = makeGame()
 
-        while(game.receiver != .sixty) {
+        (1...4).forEach { _ in
             game.addPointToReceiver()
         }
 
@@ -161,7 +161,7 @@ class GameTests: XCTestCase {
     func test_addPointsToReceiver_toWin_noAdvantage() {
         var game = makeGame()
 
-        while(game.receiver != .sixty) {
+        (1...4).forEach { _ in
             game.addPointToReceiver()
         }
 

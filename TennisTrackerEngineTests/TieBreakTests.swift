@@ -10,96 +10,96 @@ class TieBreakTests: XCTestCase {
         let tieBreak = TieBreak(totalPoints: totalPoints)
 
         XCTAssertEqual(tieBreak.totalPoints, totalPoints)
-        XCTAssertEqual(tieBreak.server, 0)
-        XCTAssertEqual(tieBreak.receiver, 0)
+        XCTAssertEqual(tieBreak.local, 0)
+        XCTAssertEqual(tieBreak.visitor, 0)
         XCTAssertFalse(tieBreak.didEnd)
     }
 
     // MARK: - Winning single point
 
-    func test_addSinglePoint_toServer() {
+    func test_addSinglePoint_toLocal() {
         var tieBreak = makeTieBreak()
 
-        tieBreak.addPointToServer()
+        tieBreak.addPointToLocal()
 
-        XCTAssertEqual(tieBreak.server, 1)
-        XCTAssertEqual(tieBreak.receiver, 0)
+        XCTAssertEqual(tieBreak.local, 1)
+        XCTAssertEqual(tieBreak.visitor, 0)
         XCTAssertFalse(tieBreak.didEnd)
     }
 
-    func test_addSinglePoint_toReceiver() {
+    func test_addSinglePoint_toVisitor() {
         var tieBreak = makeTieBreak()
 
-        tieBreak.addPointToReceiver()
+        tieBreak.addPointToVisitor()
 
-        XCTAssertEqual(tieBreak.server, 0)
-        XCTAssertEqual(tieBreak.receiver, 1)
+        XCTAssertEqual(tieBreak.local, 0)
+        XCTAssertEqual(tieBreak.visitor, 1)
         XCTAssertFalse(tieBreak.didEnd)
     }
 
     // MARK: - Going to extension
 
-    func test_AddPointsToServerAndReceiver_toExtension_thenAddPointToServer_notWinning() {
+    func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointToLocal_notWinning() {
         var tieBreak = makeTieBreak()
 
-        while(tieBreak.server < tieBreak.totalPoints - 1 && tieBreak.receiver < tieBreak.totalPoints - 1) {
-            tieBreak.addPointToServer()
-            tieBreak.addPointToReceiver()
+        while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
+            tieBreak.addPointToLocal()
+            tieBreak.addPointToVisitor()
         }
 
-        tieBreak.addPointToServer()
+        tieBreak.addPointToLocal()
 
-        XCTAssertEqual(tieBreak.server, tieBreak.totalPoints)
-        XCTAssertEqual(tieBreak.receiver, tieBreak.totalPoints - 1)
+        XCTAssertEqual(tieBreak.local, tieBreak.totalPoints)
+        XCTAssertEqual(tieBreak.visitor, tieBreak.totalPoints - 1)
         XCTAssertFalse(tieBreak.didEnd)
     }
 
-    func test_AddPointsToServerAndReceiver_toExtension_thenAddPointToReceiver_notWinning() {
+    func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointToVisitor_notWinning() {
         var tieBreak = makeTieBreak()
 
-        while(tieBreak.server < tieBreak.totalPoints - 1 && tieBreak.receiver < tieBreak.totalPoints - 1) {
-            tieBreak.addPointToServer()
-            tieBreak.addPointToReceiver()
+        while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
+            tieBreak.addPointToLocal()
+            tieBreak.addPointToVisitor()
         }
 
-        tieBreak.addPointToReceiver()
+        tieBreak.addPointToVisitor()
 
-        XCTAssertEqual(tieBreak.server, tieBreak.totalPoints - 1)
-        XCTAssertEqual(tieBreak.receiver, tieBreak.totalPoints)
+        XCTAssertEqual(tieBreak.local, tieBreak.totalPoints - 1)
+        XCTAssertEqual(tieBreak.visitor, tieBreak.totalPoints)
         XCTAssertFalse(tieBreak.didEnd)
     }
 
     // MARK: - Winning
 
-    func test_AddPointsToServerAndReceiver_toExtension_thenAddPointsToServer_toWin() {
+    func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointsToLocal_toWin() {
         var tieBreak = makeTieBreak()
 
-        while(tieBreak.server < tieBreak.totalPoints - 1 && tieBreak.receiver < tieBreak.totalPoints - 1) {
-            tieBreak.addPointToServer()
-            tieBreak.addPointToReceiver()
+        while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
+            tieBreak.addPointToLocal()
+            tieBreak.addPointToVisitor()
         }
 
-        tieBreak.addPointToServer()
-        tieBreak.addPointToServer()
+        tieBreak.addPointToLocal()
+        tieBreak.addPointToLocal()
 
-        XCTAssertEqual(tieBreak.server, tieBreak.totalPoints + 1)
-        XCTAssertEqual(tieBreak.receiver, tieBreak.totalPoints - 1)
+        XCTAssertEqual(tieBreak.local, tieBreak.totalPoints + 1)
+        XCTAssertEqual(tieBreak.visitor, tieBreak.totalPoints - 1)
         XCTAssertTrue(tieBreak.didEnd)
     }
 
-    func test_AddPointsToServerAndReceiver_toExtension_thenAddPointsToReceiver_toWin() {
+    func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointsToVisitor_toWin() {
         var tieBreak = makeTieBreak()
 
-        while(tieBreak.server < tieBreak.totalPoints - 1 && tieBreak.receiver < tieBreak.totalPoints - 1) {
-            tieBreak.addPointToServer()
-            tieBreak.addPointToReceiver()
+        while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
+            tieBreak.addPointToLocal()
+            tieBreak.addPointToVisitor()
         }
 
-        tieBreak.addPointToReceiver()
-        tieBreak.addPointToReceiver()
+        tieBreak.addPointToVisitor()
+        tieBreak.addPointToVisitor()
 
-        XCTAssertEqual(tieBreak.server, tieBreak.totalPoints - 1)
-        XCTAssertEqual(tieBreak.receiver, tieBreak.totalPoints + 1)
+        XCTAssertEqual(tieBreak.local, tieBreak.totalPoints - 1)
+        XCTAssertEqual(tieBreak.visitor, tieBreak.totalPoints + 1)
         XCTAssertTrue(tieBreak.didEnd)
     }
 

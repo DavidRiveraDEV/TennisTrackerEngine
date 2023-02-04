@@ -25,16 +25,20 @@ struct Game {
     mutating func addPointToServer() {
         if receiver == .advantage {
             receiver = .forty
-        } else {
+        } else if receiver == .forty {
             server = server.nextPoint(isAdvantage: advantageEnabled)
+        } else {
+            server = server.nextPoint(isAdvantage: false)
         }
     }
 
     mutating func addPointToReceiver() {
         if server == .advantage {
             server = .forty
-        } else {
+        } else if server == .forty {
             receiver = receiver.nextPoint(isAdvantage: advantageEnabled)
+        }  else {
+            receiver = receiver.nextPoint(isAdvantage: false)
         }
     }
 
