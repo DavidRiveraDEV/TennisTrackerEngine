@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct TieBreak {
+class TieBreak {
 
     static private let minDifference: UInt8 = 2
 
@@ -21,11 +21,11 @@ struct TieBreak {
         self.visitor = 0
     }
 
-    mutating func addPointToLocal() {
+    func addPointToLocal() {
         local += 1
     }
 
-    mutating func addPointToVisitor() {
+    func addPointToVisitor() {
         visitor += 1
     }
 

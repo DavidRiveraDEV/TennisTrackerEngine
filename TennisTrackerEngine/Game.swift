@@ -1,12 +1,18 @@
 
 import Foundation
 
-struct Game {
+protocol GameDelegate: AnyObject {
+    func gameDidEnd()
+}
+
+class Game {
 
     let advantageEnabled: Bool
 
     private(set) var server: Point
     private(set) var receiver: Point
+
+    weak var delegate: GameDelegate?
 
     init(advantageEnabled: Bool) {
         self.advantageEnabled = advantageEnabled
@@ -22,7 +28,7 @@ struct Game {
         return didServerWin() || didReceiverWin()
     }
 
-    mutating func addPointToServer() {
+    func addPointToServer() {
         if receiver == .advantage {
             receiver = .forty
         } else if receiver == .forty {
@@ -30,15 +36,23 @@ struct Game {
         } else {
             server = server.nextPoint(isAdvantage: false)
         }
+        checkIfGameEnded()
     }
 
-    mutating func addPointToReceiver() {
+    func addPointToReceiver() {
         if server == .advantage {
             server = .forty
         } else if server == .forty {
             receiver = receiver.nextPoint(isAdvantage: advantageEnabled)
         }  else {
             receiver = receiver.nextPoint(isAdvantage: false)
+        }
+        checkIfGameEnded()
+    }
+
+    private func checkIfGameEnded() {
+        if didEnd {
+            delegate?.gameDidEnd()
         }
     }
 

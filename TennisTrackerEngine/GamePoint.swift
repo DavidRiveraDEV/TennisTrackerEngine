@@ -3,7 +3,7 @@ import Foundation
 
 extension Game {
 
-    enum Point: CaseIterable {
+    enum Point {
 
         typealias RawValue = UInt8
 

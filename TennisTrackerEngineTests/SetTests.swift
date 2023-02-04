@@ -23,7 +23,7 @@ class SetTests: XCTestCase {
 
     func test_winSets_toChangeServiceType() {
         let initialServiceType = ServiceType.local
-        var set = makeSet(serviceType: initialServiceType)
+        let set = makeSet(serviceType: initialServiceType)
 
         (1...set.totalGames * 2).forEach { _ in
             let currentServiceType = set.serviceType
@@ -45,7 +45,7 @@ class SetTests: XCTestCase {
     }
 
     func test_winGameForVisitor_toChangeServiceTypeToLocal() {
-        var set = makeSet(serviceType: .visitor)
+        let set = makeSet(serviceType: .visitor)
 
         (1...4).forEach { _ in
             set.winPoint()
@@ -57,7 +57,7 @@ class SetTests: XCTestCase {
     // MARK: - Single game
 
     func test_winPoints_toWinSingleGame() throws {
-        var set = makeSet(serviceType: .local)
+        let set = makeSet(serviceType: .local)
 
         (1...4).forEach { _ in
             set.winPoint()
@@ -71,7 +71,7 @@ class SetTests: XCTestCase {
     }
 
     func test_losePoints_toLoseSingleGame() throws {
-        var set = makeSet(serviceType: .visitor)
+        let set = makeSet(serviceType: .visitor)
 
         (1...4).forEach { _ in
             set.losePoint()
@@ -85,7 +85,7 @@ class SetTests: XCTestCase {
     }
 
     func test_winPoints_toExtension_thenWinSingleGame() {
-        var set = makeSet()
+        let set = makeSet()
 
         (1...(set.totalGames - 1) * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -111,7 +111,7 @@ class SetTests: XCTestCase {
     // MARK: - Tie break
 
     func test_winPoints_toTieBreak() {
-        var set = makeSet()
+        let set = makeSet()
 
         (1...set.totalGames * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -128,7 +128,7 @@ class SetTests: XCTestCase {
     }
 
     func test_losePoints_toTieBreak() {
-        var set = makeSet()
+        let set = makeSet()
 
         (1...set.totalGames * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -145,7 +145,7 @@ class SetTests: XCTestCase {
     }
 
     func test_winPoints_toExtension_thenWinPoints_toTieBreak() {
-        var set = makeSet()
+        let set = makeSet()
 
         (1...(set.totalGames - 1) * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -171,7 +171,7 @@ class SetTests: XCTestCase {
     }
 
     func test_losePoints_toExtension_thenLosePoints_toTieBreak() {
-        var set = makeSet()
+        let set = makeSet()
 
         (1...(set.totalGames - 1) * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -197,7 +197,7 @@ class SetTests: XCTestCase {
     }
 
     func test_winPoints_toTieBreak_thenWinSingleTieBreakPoint() {
-        var set = makeSet(serviceType: .local)
+        let set = makeSet(serviceType: .local)
 
         (1...set.totalGames * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -216,7 +216,7 @@ class SetTests: XCTestCase {
     }
 
     func test_losePoints_toTieBreak_thenLoseSingleTieBreakPoint() {
-        var set = makeSet(serviceType: .visitor)
+        let set = makeSet(serviceType: .visitor)
 
         (1...set.totalGames * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -237,7 +237,7 @@ class SetTests: XCTestCase {
     // MARK: - Winning set
 
     func test_winPoints_toWinSet() {
-        var set = makeSet(serviceType: .local)
+        let set = makeSet(serviceType: .local)
 
         (1...set.totalGames).forEach { _ in
             let currentServiceType = set.serviceType
@@ -259,7 +259,7 @@ class SetTests: XCTestCase {
     }
 
     func test_winPoints_toWinSet_withMinDifference() {
-        var set = makeSet(serviceType: .visitor)
+        let set = makeSet(serviceType: .visitor)
 
         (1...(set.totalGames - Set.minDifferencePerSet) * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -286,7 +286,7 @@ class SetTests: XCTestCase {
     }
 
     func test_winPoints_toWinSet_withMinDifference_withExtension() {
-        var set = makeSet(serviceType: .local)
+        let set = makeSet(serviceType: .local)
 
         (1...(set.totalGames - 1) * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -314,7 +314,7 @@ class SetTests: XCTestCase {
 
     func test_winPoints_toTieBreak_thenWinPoints_toWinSet() {
         let totalPointsForTieBreak: UInt8 = 7
-        var set = makeSet(totalPointsForTieBreak: totalPointsForTieBreak)
+        let set = makeSet(totalPointsForTieBreak: totalPointsForTieBreak)
 
         (1...set.totalGames * 2).forEach { _ in
             (1...4).forEach { _ in
@@ -340,7 +340,7 @@ class SetTests: XCTestCase {
 
     func test_losePoints_toTieBreak_thenLosePoints_toLoseSet() {
         let totalPointsForTieBreak: UInt8 = 7
-        var set = makeSet(totalPointsForTieBreak: totalPointsForTieBreak)
+        let set = makeSet(totalPointsForTieBreak: totalPointsForTieBreak)
 
         (1...set.totalGames * 2).forEach { _ in
             (1...4).forEach { _ in

@@ -14,12 +14,23 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .love)
         XCTAssertFalse(game.isDeuce)
         XCTAssertFalse(game.didEnd)
+        XCTAssertNil(game.delegate)
+    }
+
+    func test_game_withWeakDelegate() {
+        let game = makeGame()
+        var gameDelegate: GameDelegate? = GameDelegateSpy()
+        game.delegate = gameDelegate
+
+        gameDelegate = nil
+
+        XCTAssertNil(game.delegate)
     }
 
     // MARK: - Winning single point
 
     func test_addSinglePoint_toServer() {
-        var game = makeGame()
+        let game = makeGame()
 
         game.addPointToServer()
 
@@ -28,7 +39,7 @@ class GameTests: XCTestCase {
     }
 
     func test_addSinglePoint_toReceiver() {
-        var game = makeGame()
+        let game = makeGame()
 
         game.addPointToReceiver()
 
@@ -39,7 +50,7 @@ class GameTests: XCTestCase {
     // MARK: - Deuce
 
     func test_AddPointsToServerAndReceiver_toDeuce() {
-        var game = makeGame()
+        let game = makeGame()
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -53,7 +64,7 @@ class GameTests: XCTestCase {
     }
 
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toTakeAdvantage() {
-        var game = makeGame()
+        let game = makeGame()
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -69,7 +80,7 @@ class GameTests: XCTestCase {
     }
 
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toTakeAdvantage() {
-        var game = makeGame()
+        let game = makeGame()
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -85,7 +96,7 @@ class GameTests: XCTestCase {
     }
 
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toTakeAdvantage_thenAddPointToReceiver_toDeuce() {
-        var game = makeGame()
+        let game = makeGame()
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -101,7 +112,7 @@ class GameTests: XCTestCase {
     }
 
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toTakeAdvantage_thenAddPointToServer_toDeuce() {
-        var game = makeGame()
+        let game = makeGame()
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -119,8 +130,24 @@ class GameTests: XCTestCase {
 
     // MARK: - Winning game
 
+    func test_addPointsToServer_toWin_notifyDelegate() {
+        let game = makeGame()
+        let gameDelegate = GameDelegateSpy()
+        game.delegate = gameDelegate
+
+        (1...4).forEach { _ in
+            game.addPointToServer()
+        }
+
+        XCTAssertEqual(game.server, .sixty)
+        XCTAssertEqual(game.receiver, .love)
+        XCTAssertFalse(game.isDeuce)
+        XCTAssertTrue(game.didEnd)
+        XCTAssertTrue(gameDelegate.gameDidEndCalled)
+    }
+
     func test_addPointsToServer_toWin_withAdvantage() {
-        var game = makeGame()
+        let game = makeGame()
 
         (1...4).forEach { _ in
             game.addPointToServer()
@@ -133,7 +160,7 @@ class GameTests: XCTestCase {
     }
 
     func test_addPointsToServer_toWin_noAdvantage() {
-        var game = makeGame(advantageEnabled: false)
+        let game = makeGame(advantageEnabled: false)
 
         (1...4).forEach { _ in
             game.addPointToServer()
@@ -146,7 +173,7 @@ class GameTests: XCTestCase {
     }
 
     func test_addPointsToReceiver_toWin_withAdvantage() {
-        var game = makeGame()
+        let game = makeGame()
 
         (1...4).forEach { _ in
             game.addPointToReceiver()
@@ -159,7 +186,7 @@ class GameTests: XCTestCase {
     }
 
     func test_addPointsToReceiver_toWin_noAdvantage() {
-        var game = makeGame()
+        let game = makeGame()
 
         (1...4).forEach { _ in
             game.addPointToReceiver()
@@ -172,7 +199,7 @@ class GameTests: XCTestCase {
     }
 
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toWin_withAdvantage() {
-        var game = makeGame()
+        let game = makeGame()
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -189,7 +216,7 @@ class GameTests: XCTestCase {
     }
 
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toWin_noAdvantage() {
-        var game = makeGame(advantageEnabled: false)
+        let game = makeGame(advantageEnabled: false)
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -205,7 +232,7 @@ class GameTests: XCTestCase {
     }
 
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toWin_withAdvantage() {
-        var game = makeGame()
+        let game = makeGame()
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -222,7 +249,7 @@ class GameTests: XCTestCase {
     }
 
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toWin_noAdvantage() {
-        var game = makeGame(advantageEnabled: false)
+        let game = makeGame(advantageEnabled: false)
 
         while(game.server != .forty && game.receiver != .forty) {
             game.addPointToServer()
@@ -242,5 +269,14 @@ class GameTests: XCTestCase {
     private func makeGame(advantageEnabled: Bool = true) -> Game {
         let game = Game(advantageEnabled: advantageEnabled)
         return game
+    }
+
+    private class GameDelegateSpy: GameDelegate {
+
+        private(set) var gameDidEndCalled: Bool = false
+
+        func gameDidEnd() {
+            gameDidEndCalled = true
+        }
     }
 }

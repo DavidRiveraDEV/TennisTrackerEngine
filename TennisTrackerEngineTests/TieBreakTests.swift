@@ -18,7 +18,7 @@ class TieBreakTests: XCTestCase {
     // MARK: - Winning single point
 
     func test_addSinglePoint_toLocal() {
-        var tieBreak = makeTieBreak()
+        let tieBreak = makeTieBreak()
 
         tieBreak.addPointToLocal()
 
@@ -28,7 +28,7 @@ class TieBreakTests: XCTestCase {
     }
 
     func test_addSinglePoint_toVisitor() {
-        var tieBreak = makeTieBreak()
+        let tieBreak = makeTieBreak()
 
         tieBreak.addPointToVisitor()
 
@@ -40,7 +40,7 @@ class TieBreakTests: XCTestCase {
     // MARK: - Going to extension
 
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointToLocal_notWinning() {
-        var tieBreak = makeTieBreak()
+        let tieBreak = makeTieBreak()
 
         while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
             tieBreak.addPointToLocal()
@@ -55,7 +55,7 @@ class TieBreakTests: XCTestCase {
     }
 
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointToVisitor_notWinning() {
-        var tieBreak = makeTieBreak()
+        let tieBreak = makeTieBreak()
 
         while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
             tieBreak.addPointToLocal()
@@ -72,7 +72,7 @@ class TieBreakTests: XCTestCase {
     // MARK: - Winning
 
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointsToLocal_toWin() {
-        var tieBreak = makeTieBreak()
+        let tieBreak = makeTieBreak()
 
         while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
             tieBreak.addPointToLocal()
@@ -88,7 +88,7 @@ class TieBreakTests: XCTestCase {
     }
 
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointsToVisitor_toWin() {
-        var tieBreak = makeTieBreak()
+        let tieBreak = makeTieBreak()
 
         while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
             tieBreak.addPointToLocal()

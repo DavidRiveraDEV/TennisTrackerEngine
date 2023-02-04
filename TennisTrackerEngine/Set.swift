@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Set {
+class Set: GameDelegate {
 
     static let minDifferencePerSet: UInt8 = 2
 
@@ -48,29 +48,28 @@ struct Set {
         self.history = [.local: [], .visitor: []]
         self.currentGame = Game(advantageEnabled: advantageEnabled)
         self.tieBreak = TieBreak(totalPoints: totalPointsForTieBreak)
+        self.currentGame.delegate = self
     }
 
-    mutating func winPoint() {
+    func winPoint() {
         if isTieBreak {
             winPointToTieBreak()
             checkForTieBreakServiceChange()
         } else {
             currentGame.addPointToServer()
-            checkIfGameEnded()
         }
     }
 
-    mutating func losePoint() {
+    func losePoint() {
         if isTieBreak {
             losePointToTieBreak()
             checkForTieBreakServiceChange()
         } else {
             currentGame.addPointToReceiver()
-            checkIfGameEnded()
         }
     }
 
-    private mutating func winPointToTieBreak() {
+    private func winPointToTieBreak() {
         if serviceType == .local {
             tieBreak.addPointToLocal()
         } else {
@@ -78,7 +77,7 @@ struct Set {
         }
     }
 
-    private mutating func losePointToTieBreak() {
+    private func losePointToTieBreak() {
         if serviceType == .local {
             tieBreak.addPointToVisitor()
         } else {
@@ -86,15 +85,7 @@ struct Set {
         }
     }
 
-    private mutating func checkIfGameEnded() {
-        if currentGame.didEnd {
-            addCurrentGameToHistory()
-            startNewGame()
-            changeService()
-        }
-    }
-
-    private mutating func checkForTieBreakServiceChange() {
+    private func checkForTieBreakServiceChange() {
         if tieBreak.didEnd {
             addCurrentGameToHistory()
         } else if shouldChangeServiceForTieBreak(){
@@ -102,7 +93,7 @@ struct Set {
         }
     }
 
-    private mutating func changeService() {
+    private func changeService() {
         serviceType = getNextServiceType(for: serviceType)
     }
 
@@ -111,13 +102,14 @@ struct Set {
         return !tieBreak.didEnd && pointsPlayed % 2 == 1
     }
 
-    private mutating func startNewGame() {
+    private func startNewGame() {
         if  !isTieBreak {
             currentGame = Game(advantageEnabled: currentGame.advantageEnabled)
+            currentGame.delegate = self
         }
     }
 
-    private mutating func addCurrentGameToHistory() {
+    private func addCurrentGameToHistory() {
         if isTieBreak {
             let winnerServiceType: ServiceType = tieBreak.local > tieBreak.visitor ? .local : .visitor
             history[winnerServiceType]?.append(currentGame)
@@ -133,5 +125,13 @@ struct Set {
         case .local: return .visitor
         case .visitor: return .local
         }
+    }
+
+    // MARK: - GameDelegate
+
+    func gameDidEnd() {
+        addCurrentGameToHistory()
+        startNewGame()
+        changeService()
     }
 }
