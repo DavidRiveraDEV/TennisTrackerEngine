@@ -116,6 +116,7 @@ class Set: GameDelegate {
     }
 
     private func addCurrentGameToHistory() {
+        currentGame.delegate = nil
         if isTieBreak {
             let winnerServiceType: ServiceType = tieBreak.local > tieBreak.visitor ? .local : .visitor
             history[winnerServiceType]?.append(currentGame)
