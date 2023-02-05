@@ -17,6 +17,17 @@ class SetTests: XCTestCase {
         XCTAssertEqual(set.visitorGames, 0)
         XCTAssertFalse(set.isTieBreak)
         XCTAssertFalse(set.didEnd)
+        XCTAssertNil(set.delegate)
+    }
+
+    func test_set_withWeakDelegate() {
+        let set = makeSet()
+        var setDelegate: SetDelegate? = SetDelegateSpy()
+        set.delegate = setDelegate
+
+        setDelegate = nil
+
+        XCTAssertNil(set.delegate)
     }
 
     // MARK: - Change of service type
@@ -236,6 +247,31 @@ class SetTests: XCTestCase {
 
     // MARK: - Winning set
 
+    func test_winPoints_toWinSet_notifyDelegate() {
+        let set = makeSet(serviceType: .local)
+        let setDelegate = SetDelegateSpy()
+        set.delegate = setDelegate
+
+        (1...set.totalGames).forEach { _ in
+            let currentServiceType = set.serviceType
+            (1...4).forEach { _ in
+                if currentServiceType == .local {
+                    set.winPoint()
+                } else {
+                    set.losePoint()
+                }
+            }
+        }
+
+        XCTAssertFalse(set.isTieBreak)
+        XCTAssertTrue(set.didEnd)
+        XCTAssertEqual(set.localGames, set.totalGames)
+        XCTAssertEqual(set.visitorGames, 0)
+        XCTAssertEqual(set.localTieBreakPoints, 0)
+        XCTAssertEqual(set.visitorTieBreakPoints, 0)
+        XCTAssertTrue(setDelegate.setDidEndCalled)
+    }
+
     func test_winPoints_toWinSet() {
         let set = makeSet(serviceType: .local)
 
@@ -381,6 +417,15 @@ class SetTests: XCTestCase {
         switch serviceType {
         case .local: return .visitor
         case .visitor: return .local
+        }
+    }
+
+    private class SetDelegateSpy: SetDelegate {
+
+        private(set) var setDidEndCalled: Bool = false
+
+        func setDidEnd() {
+            setDidEndCalled = true
         }
     }
 }

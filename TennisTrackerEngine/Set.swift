@@ -1,6 +1,10 @@
 
 import Foundation
 
+protocol SetDelegate: AnyObject {
+    func setDidEnd()
+}
+
 class Set: GameDelegate {
 
     static let minDifferencePerSet: UInt8 = 2
@@ -10,6 +14,8 @@ class Set: GameDelegate {
     private var history: [ServiceType : [Game]]
     private var currentGame: Game
     private var tieBreak: TieBreak
+
+    weak var delegate: SetDelegate?
 
     var localGames: UInt8 {
         return UInt8(history[.local]!.count)
@@ -120,6 +126,12 @@ class Set: GameDelegate {
         }
     }
 
+    private func checkIfSetEnded() {
+        if didEnd {
+            delegate?.setDidEnd()
+        }
+    }
+
     private func getNextServiceType(for serviceType: ServiceType) -> ServiceType {
         switch serviceType {
         case .local: return .visitor
@@ -133,5 +145,6 @@ class Set: GameDelegate {
         addCurrentGameToHistory()
         startNewGame()
         changeService()
+        checkIfSetEnded()
     }
 }
