@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD75903B298F502E00303CAF /* MatchSetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75903A298F502E00303CAF /* MatchSetType.swift */; };
+		CD75903C298F507E00303CAF /* MatchSetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75903A298F502E00303CAF /* MatchSetType.swift */; };
+		CD75903E298F544200303CAF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75903D298F544200303CAF /* Player.swift */; };
+		CD75903F298F546700303CAF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75903D298F544200303CAF /* Player.swift */; };
 		CD95D411298C913900037F68 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D410298C913900037F68 /* Match.swift */; };
 		CD95D413298C915B00037F68 /* MatchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D412298C915B00037F68 /* MatchOptions.swift */; };
 		CD95D415298C917D00037F68 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D414298C917D00037F68 /* Set.swift */; };
@@ -41,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD75903A298F502E00303CAF /* MatchSetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchSetType.swift; sourceTree = "<group>"; };
+		CD75903D298F544200303CAF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		CD95D410298C913900037F68 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		CD95D412298C915B00037F68 /* MatchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchOptions.swift; sourceTree = "<group>"; };
 		CD95D414298C917D00037F68 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
@@ -105,6 +111,8 @@
 				CD95D414298C917D00037F68 /* Set.swift */,
 				CD95D427298C9CE300037F68 /* TieBreak.swift */,
 				CD95D42F298D864100037F68 /* ServiceType.swift */,
+				CD75903A298F502E00303CAF /* MatchSetType.swift */,
+				CD75903D298F544200303CAF /* Player.swift */,
 			);
 			path = TennisTrackerEngine;
 			sourceTree = "<group>";
@@ -232,12 +240,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD75903B298F502E00303CAF /* MatchSetType.swift in Sources */,
 				CD95D415298C917D00037F68 /* Set.swift in Sources */,
 				CD95D417298C919300037F68 /* Game.swift in Sources */,
 				CD95D419298C91B700037F68 /* GamePoint.swift in Sources */,
 				CD95D413298C915B00037F68 /* MatchOptions.swift in Sources */,
 				CD95D428298C9CE300037F68 /* TieBreak.swift in Sources */,
 				CD95D411298C913900037F68 /* Match.swift in Sources */,
+				CD75903E298F544200303CAF /* Player.swift in Sources */,
 				CD95D430298D864100037F68 /* ServiceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +268,8 @@
 				CD95D424298C96FF00037F68 /* SetTests.swift in Sources */,
 				CD95D41B298C920000037F68 /* GamePointTests.swift in Sources */,
 				CD95D420298C92F900037F68 /* Match.swift in Sources */,
+				CD75903C298F507E00303CAF /* MatchSetType.swift in Sources */,
+				CD75903F298F546700303CAF /* Player.swift in Sources */,
 				CD95D41D298C925D00037F68 /* MatchOptionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
