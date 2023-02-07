@@ -100,7 +100,7 @@ class Set: GameDelegate {
     }
 
     private func changeService() {
-        serviceType = getNextServiceType(for: serviceType)
+        serviceType = serviceType.next
     }
 
     private func shouldChangeServiceForTieBreak() -> Bool {
@@ -123,20 +123,13 @@ class Set: GameDelegate {
         } else if currentGame.server == .sixty {
             history[serviceType]?.append(currentGame)
         } else {
-            history[getNextServiceType(for: serviceType)]?.append(currentGame)
+            history[serviceType.next]?.append(currentGame)
         }
     }
 
     private func checkIfSetEnded() {
         if didEnd {
             delegate?.setDidEnd()
-        }
-    }
-
-    private func getNextServiceType(for serviceType: ServiceType) -> ServiceType {
-        switch serviceType {
-        case .local: return .visitor
-        case .visitor: return .local
         }
     }
 

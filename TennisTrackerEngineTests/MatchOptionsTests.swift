@@ -5,18 +5,18 @@ import XCTest
 class MatchOptionsTests: XCTestCase {
 
     func test_matchOptions_withValidValues() {
-        let setType: Match.SetType = .three
+        let matchType: Match.`Type` = .three
         let gamesPerSet: UInt8 = 6
         let pointsPerTieBreak: UInt8 = 7
         let advantage: Bool = false
         let serviceType: ServiceType = .local
-        let options = Match.Options(setType: setType,
+        let options = Match.Options(matchType: matchType,
                                     gamesPerSet: gamesPerSet,
                                     pointsPerTieBreak: pointsPerTieBreak,
                                     advantage: advantage,
                                     serviceType: serviceType)
 
-        XCTAssertEqual(options.setType, .three)
+        XCTAssertEqual(options.matchType, matchType)
         XCTAssertEqual(options.gamesPerSet, gamesPerSet)
         XCTAssertEqual(options.pointsPerTieBreak, pointsPerTieBreak)
         XCTAssertEqual(options.advantage, advantage)

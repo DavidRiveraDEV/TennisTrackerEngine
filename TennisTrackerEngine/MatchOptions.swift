@@ -5,7 +5,7 @@ extension Match {
 
     struct Options {
 
-        let setType: SetType
+        let matchType: Match.`Type`
         let gamesPerSet: UInt8
         let pointsPerTieBreak: UInt8
         let advantage: Bool
