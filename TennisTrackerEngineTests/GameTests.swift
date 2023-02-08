@@ -52,10 +52,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce() {
         let game = makeGame()
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
+        toDeuce(game: game)
 
         XCTAssertTrue(game.isDeuce)
         XCTAssertFalse(game.didEnd)
@@ -66,10 +63,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toTakeAdvantage() {
         let game = makeGame()
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
+        toDeuce(game: game)
 
         game.addPointToServer()
 
@@ -82,10 +76,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toTakeAdvantage() {
         let game = makeGame()
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
+        toDeuce(game: game)
 
         game.addPointToReceiver()
 
@@ -98,10 +89,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toTakeAdvantage_thenAddPointToReceiver_toDeuce() {
         let game = makeGame()
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
+        toDeuce(game: game)
         game.addPointToServer()
         game.addPointToReceiver()
 
@@ -114,11 +102,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toTakeAdvantage_thenAddPointToServer_toDeuce() {
         let game = makeGame()
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
-
+        toDeuce(game: game)
         game.addPointToReceiver()
         game.addPointToServer()
 
@@ -135,9 +119,7 @@ class GameTests: XCTestCase {
         let gameDelegate = GameDelegateSpy()
         game.delegate = gameDelegate
 
-        (1...4).forEach { _ in
-            game.addPointToServer()
-        }
+        win(game: game, toServer: true)
 
         XCTAssertEqual(game.server, .sixty)
         XCTAssertEqual(game.receiver, .love)
@@ -149,9 +131,7 @@ class GameTests: XCTestCase {
     func test_addPointsToServer_toWin_withAdvantage() {
         let game = makeGame()
 
-        (1...4).forEach { _ in
-            game.addPointToServer()
-        }
+        win(game: game, toServer: true)
 
         XCTAssertEqual(game.server, .sixty)
         XCTAssertEqual(game.receiver, .love)
@@ -162,9 +142,7 @@ class GameTests: XCTestCase {
     func test_addPointsToServer_toWin_noAdvantage() {
         let game = makeGame(advantageEnabled: false)
 
-        (1...4).forEach { _ in
-            game.addPointToServer()
-        }
+        win(game: game, toServer: true)
 
         XCTAssertEqual(game.server, .sixty)
         XCTAssertEqual(game.receiver, .love)
@@ -175,9 +153,7 @@ class GameTests: XCTestCase {
     func test_addPointsToReceiver_toWin_withAdvantage() {
         let game = makeGame()
 
-        (1...4).forEach { _ in
-            game.addPointToReceiver()
-        }
+        win(game: game, toServer: false)
 
         XCTAssertEqual(game.server, .love)
         XCTAssertEqual(game.receiver, .sixty)
@@ -188,9 +164,7 @@ class GameTests: XCTestCase {
     func test_addPointsToReceiver_toWin_noAdvantage() {
         let game = makeGame()
 
-        (1...4).forEach { _ in
-            game.addPointToReceiver()
-        }
+        win(game: game, toServer: false)
 
         XCTAssertEqual(game.server, .love)
         XCTAssertEqual(game.receiver, .sixty)
@@ -201,10 +175,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toWin_withAdvantage() {
         let game = makeGame()
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
+        toDeuce(game: game)
 
         game.addPointToServer()
         game.addPointToServer()
@@ -218,10 +189,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toWin_noAdvantage() {
         let game = makeGame(advantageEnabled: false)
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
+        toDeuce(game: game)
 
         game.addPointToServer()
 
@@ -234,10 +202,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toWin_withAdvantage() {
         let game = makeGame()
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
+        toDeuce(game: game)
 
         game.addPointToReceiver()
         game.addPointToReceiver()
@@ -251,10 +216,7 @@ class GameTests: XCTestCase {
     func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toWin_noAdvantage() {
         let game = makeGame(advantageEnabled: false)
 
-        while(game.server != .forty && game.receiver != .forty) {
-            game.addPointToServer()
-            game.addPointToReceiver()
-        }
+        toDeuce(game: game)
 
         game.addPointToReceiver()
 
@@ -277,6 +239,23 @@ class GameTests: XCTestCase {
 
         func gameDidEnd() {
             gameDidEndCalled = true
+        }
+    }
+
+    private func toDeuce(game: Game) {
+        (1...3).forEach { _ in
+            game.addPointToServer()
+            game.addPointToReceiver()
+        }
+    }
+
+    private func win(game: Game, toServer: Bool) {
+        (1...4).forEach { _ in
+            if toServer {
+                game.addPointToServer()
+            } else {
+                game.addPointToReceiver()
+            }
         }
     }
 }
