@@ -41,10 +41,7 @@ class TieBreakTests: XCTestCase {
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointToLocal_notWinning() {
         let tieBreak = makeTieBreak()
 
-        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
-            tieBreak.addPointToLocal()
-            tieBreak.addPointToVisitor()
-        }
+        goToExtension(for: tieBreak)
 
         tieBreak.addPointToLocal()
 
@@ -56,10 +53,7 @@ class TieBreakTests: XCTestCase {
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointToVisitor_notWinning() {
         let tieBreak = makeTieBreak()
 
-        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
-            tieBreak.addPointToLocal()
-            tieBreak.addPointToVisitor()
-        }
+        goToExtension(for: tieBreak)
 
         tieBreak.addPointToVisitor()
 
@@ -73,10 +67,7 @@ class TieBreakTests: XCTestCase {
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointsToLocal_toWin() {
         let tieBreak = makeTieBreak()
 
-        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
-            tieBreak.addPointToLocal()
-            tieBreak.addPointToVisitor()
-        }
+        goToExtension(for: tieBreak)
 
         tieBreak.addPointToLocal()
         tieBreak.addPointToLocal()
@@ -89,10 +80,7 @@ class TieBreakTests: XCTestCase {
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointsToVisitor_toWin() {
         let tieBreak = makeTieBreak()
 
-        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
-            tieBreak.addPointToLocal()
-            tieBreak.addPointToVisitor()
-        }
+        goToExtension(for: tieBreak)
 
         tieBreak.addPointToVisitor()
         tieBreak.addPointToVisitor()
@@ -107,5 +95,12 @@ class TieBreakTests: XCTestCase {
     private func makeTieBreak(totalPoints: UInt8 = 7) -> TieBreak {
         let tieBreak = TieBreak(totalPoints: totalPoints)
         return tieBreak
+    }
+
+    private func goToExtension(for tieBreak: TieBreak) {
+        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
+            tieBreak.addPointToLocal()
+            tieBreak.addPointToVisitor()
+        }
     }
 }
