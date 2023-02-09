@@ -1,4 +1,3 @@
-
 import Foundation
 import XCTest
 
@@ -121,7 +120,7 @@ class MatchTests: XCTestCase {
     private func winSet(for match: Match, to serviceType: ServiceType) {
         (1...match.options.gamesPerSet).forEach { _ in
             (1...4).forEach { _ in
-                if match.serviceType == serviceType  {
+                if match.serviceType == serviceType {
                     match.winPoint()
                 } else {
                     match.losePoint()

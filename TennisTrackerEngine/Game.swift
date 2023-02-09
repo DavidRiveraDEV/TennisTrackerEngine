@@ -1,4 +1,3 @@
-
 import Foundation
 
 protocol GameDelegate: AnyObject {
@@ -44,7 +43,7 @@ class Game {
             server = .forty
         } else if server == .forty {
             receiver = receiver.nextPoint(isAdvantage: advantageEnabled)
-        }  else {
+        } else {
             receiver = receiver.nextPoint(isAdvantage: false)
         }
         checkIfGameEnded()

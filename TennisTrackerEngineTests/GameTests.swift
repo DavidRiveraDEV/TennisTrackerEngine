@@ -1,4 +1,3 @@
-
 import Foundation
 import XCTest
 
@@ -49,7 +48,7 @@ class GameTests: XCTestCase {
 
     // MARK: - Deuce
 
-    func test_AddPointsToServerAndReceiver_toDeuce() {
+    func test_AddPoints_toDeuce() {
         let game = makeGame()
 
         toDeuce(game: game)
@@ -60,7 +59,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .forty)
     }
 
-    func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toTakeAdvantage() {
+    func test_AddPoints_toDeuce_thenAddPointToSever_toTakeAdvantage() {
         let game = makeGame()
 
         toDeuce(game: game)
@@ -73,7 +72,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .forty)
     }
 
-    func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toTakeAdvantage() {
+    func test_AddPoints_toDeuce_thenAddPointToReceiver_toTakeAdvantage() {
         let game = makeGame()
 
         toDeuce(game: game)
@@ -86,7 +85,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .advantage)
     }
 
-    func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toTakeAdvantage_thenAddPointToReceiver_toDeuce() {
+    func test_AddPoints_toDeuce_thenAddPointToSever_toTakeAdvantage_thenAddPointToReceiver_toDeuce() {
         let game = makeGame()
 
         toDeuce(game: game)
@@ -99,7 +98,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .forty)
     }
 
-    func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toTakeAdvantage_thenAddPointToServer_toDeuce() {
+    func test_AddPoints_toDeuce_thenAddPointToReceiver_toTakeAdvantage_thenAddPointToServer_toDeuce() {
         let game = makeGame()
 
         toDeuce(game: game)
@@ -172,7 +171,7 @@ class GameTests: XCTestCase {
         XCTAssertTrue(game.didEnd)
     }
 
-    func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toWin_withAdvantage() {
+    func test_AddPoints_toDeuce_thenAddPointToSever_toWin_withAdvantage() {
         let game = makeGame()
 
         toDeuce(game: game)
@@ -186,7 +185,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .forty)
     }
 
-    func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToSever_toWin_noAdvantage() {
+    func test_AddPoints_toDeuce_thenAddPointToSever_toWin_noAdvantage() {
         let game = makeGame(advantageEnabled: false)
 
         toDeuce(game: game)
@@ -199,7 +198,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .forty)
     }
 
-    func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toWin_withAdvantage() {
+    func test_AddPoints_toDeuce_thenAddPointToReceiver_toWin_withAdvantage() {
         let game = makeGame()
 
         toDeuce(game: game)
@@ -213,7 +212,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.receiver, .sixty)
     }
 
-    func test_AddPointsToServerAndReceiver_toDeuce_thenAddPointToReceiver_toWin_noAdvantage() {
+    func test_AddPoints_toDeuce_thenAddPointToReceiver_toWin_noAdvantage() {
         let game = makeGame(advantageEnabled: false)
 
         toDeuce(game: game)
@@ -225,7 +224,7 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.server, .forty)
         XCTAssertEqual(game.receiver, .sixty)
     }
-    
+
     // MARK: - Utils
 
     private func makeGame(advantageEnabled: Bool = true) -> Game {

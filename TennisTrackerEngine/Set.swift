@@ -1,4 +1,3 @@
-
 import Foundation
 
 protocol SetDelegate: AnyObject {
@@ -11,7 +10,7 @@ class Set: GameDelegate {
 
     private(set) var serviceType: ServiceType
     private(set) var totalGames: UInt8
-    private var history: [ServiceType : [Game]]
+    private var history: [ServiceType: [Game]]
     private var currentGame: Game
     private var tieBreak: TieBreak
 
@@ -48,7 +47,8 @@ class Set: GameDelegate {
     }
 
     init(serviceType: ServiceType, totalGames: UInt8, totalPointsForTieBreak: UInt8, advantageEnabled: Bool) {
-        precondition(totalGames >= Set.minDifferencePerSet, "Total games cannot be lower than \(Set.minDifferencePerSet)")
+        precondition(totalGames >= Set.minDifferencePerSet,
+                     "Total games cannot be lower than \(Set.minDifferencePerSet)")
         self.serviceType = serviceType
         self.totalGames = totalGames
         self.history = [.local: [], .visitor: []]
@@ -94,7 +94,7 @@ class Set: GameDelegate {
     private func checkForTieBreakServiceChange() {
         if tieBreak.didEnd {
             addCurrentGameToHistory()
-        } else if shouldChangeServiceForTieBreak(){
+        } else if shouldChangeServiceForTieBreak() {
             changeService()
         }
     }

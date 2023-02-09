@@ -1,4 +1,3 @@
-
 import Foundation
 
 class TieBreak {
@@ -15,7 +14,8 @@ class TieBreak {
     }
 
     init(totalPoints: UInt8) {
-        precondition(totalPoints >= TieBreak.minDifference, "totalPoints (\(totalPoints)) cannot be lower than \(TieBreak.minDifference).")
+        precondition(totalPoints >= TieBreak.minDifference,
+                     "totalPoints (\(totalPoints)) cannot be lower than \(TieBreak.minDifference).")
         self.totalPoints = totalPoints
         self.local = 0
         self.visitor = 0

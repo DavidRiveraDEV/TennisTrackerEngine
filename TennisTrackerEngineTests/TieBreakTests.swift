@@ -1,4 +1,3 @@
-
 import Foundation
 import XCTest
 
@@ -42,7 +41,7 @@ class TieBreakTests: XCTestCase {
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointToLocal_notWinning() {
         let tieBreak = makeTieBreak()
 
-        while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
+        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
             tieBreak.addPointToLocal()
             tieBreak.addPointToVisitor()
         }
@@ -57,7 +56,7 @@ class TieBreakTests: XCTestCase {
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointToVisitor_notWinning() {
         let tieBreak = makeTieBreak()
 
-        while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
+        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
             tieBreak.addPointToLocal()
             tieBreak.addPointToVisitor()
         }
@@ -74,7 +73,7 @@ class TieBreakTests: XCTestCase {
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointsToLocal_toWin() {
         let tieBreak = makeTieBreak()
 
-        while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
+        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
             tieBreak.addPointToLocal()
             tieBreak.addPointToVisitor()
         }
@@ -90,7 +89,7 @@ class TieBreakTests: XCTestCase {
     func test_AddPointsToLocalAndVisitor_toExtension_thenAddPointsToVisitor_toWin() {
         let tieBreak = makeTieBreak()
 
-        while(tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1) {
+        while tieBreak.local < tieBreak.totalPoints - 1 && tieBreak.visitor < tieBreak.totalPoints - 1 {
             tieBreak.addPointToLocal()
             tieBreak.addPointToVisitor()
         }
