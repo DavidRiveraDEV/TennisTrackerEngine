@@ -118,6 +118,18 @@ class MatchTests: XCTestCase {
                      visitorPlayer: visitorPlayer)
     }
 
+    private func winSet(for match: Match, to serviceType: ServiceType) {
+        (1...match.options.gamesPerSet).forEach { _ in
+            (1...4).forEach { _ in
+                if match.serviceType == serviceType  {
+                    match.winPoint()
+                } else {
+                    match.losePoint()
+                }
+            }
+        }
+    }
+
     private static func makeOptions(matchType: Match.`Type` = .three,
                                     gamesPerSet: UInt8 = 6,
                                     pointsPerTieBreak: UInt8 = 7,
@@ -129,18 +141,6 @@ class MatchTests: XCTestCase {
                              pointsPerTieBreak: pointsPerTieBreak,
                              advantage: advantage,
                              serviceType: serviceType)
-    }
-
-    private func winSet(for match: Match, to serviceType: ServiceType) {
-        (1...match.options.gamesPerSet).forEach { _ in
-            (1...4).forEach { _ in
-                if match.serviceType == serviceType  {
-                    match.winPoint()
-                } else {
-                    match.losePoint()
-                }
-            }
-        }
     }
 
     private class MatchDelegateSpy: MatchDelegate {

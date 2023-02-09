@@ -233,15 +233,6 @@ class GameTests: XCTestCase {
         return game
     }
 
-    private class GameDelegateSpy: GameDelegate {
-
-        private(set) var gameDidEndCalled: Bool = false
-
-        func gameDidEnd() {
-            gameDidEndCalled = true
-        }
-    }
-
     private func toDeuce(game: Game) {
         (1...3).forEach { _ in
             game.addPointToServer()
@@ -256,6 +247,15 @@ class GameTests: XCTestCase {
             } else {
                 game.addPointToReceiver()
             }
+        }
+    }
+
+    private class GameDelegateSpy: GameDelegate {
+
+        private(set) var gameDidEndCalled: Bool = false
+
+        func gameDidEnd() {
+            gameDidEndCalled = true
         }
     }
 }

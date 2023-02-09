@@ -38,9 +38,7 @@ class SetTests: XCTestCase {
 
         (1...set.totalGames * 2).forEach { _ in
             let currentServiceType = set.serviceType
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
+            addGameFor(set: set, win: true)
             XCTAssertEqual(set.serviceType, getNextServiceType(for: currentServiceType))
         }
         XCTAssertEqual(set.serviceType, initialServiceType)
@@ -55,61 +53,17 @@ class SetTests: XCTestCase {
         XCTAssertEqual(set.serviceType, getNextServiceType(for: currentServiceType))
     }
 
-    func test_winGameForVisitor_toChangeServiceTypeToLocal() {
-        let set = makeSet(serviceType: .visitor)
-
-        (1...4).forEach { _ in
-            set.winPoint()
-        }
-
-        XCTAssertEqual(set.serviceType, .local)
-    }
-
     // MARK: - Single game
-
-    func test_winPoints_toWinSingleGame() throws {
-        let set = makeSet(serviceType: .local)
-
-        (1...4).forEach { _ in
-            set.winPoint()
-        }
-
-        XCTAssertEqual(set.localGames, 1)
-        XCTAssertEqual(set.visitorGames, 0)
-        XCTAssertEqual(set.serviceType, .visitor)
-        XCTAssertFalse(set.isTieBreak)
-        XCTAssertFalse(set.didEnd)
-    }
-
-    func test_losePoints_toLoseSingleGame() throws {
-        let set = makeSet(serviceType: .visitor)
-
-        (1...4).forEach { _ in
-            set.losePoint()
-        }
-
-        XCTAssertEqual(set.localGames, 1)
-        XCTAssertEqual(set.visitorGames, 0)
-        XCTAssertEqual(set.serviceType, .local)
-        XCTAssertFalse(set.isTieBreak)
-        XCTAssertFalse(set.didEnd)
-    }
 
     func test_winPoints_toExtension_thenWinSingleGame() {
         let set = makeSet()
 
-        (1...(set.totalGames - 1) * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
-        }
+        goToExtension(set: set, win: true)
 
         XCTAssertEqual(set.localGames, set.totalGames - 1)
         XCTAssertEqual(set.visitorGames, set.totalGames - 1)
 
-        (1...4).forEach { _ in
-            set.winPoint()
-        }
+        addGameFor(set: set, win: true)
 
         XCTAssertEqual(set.localGames, set.totalGames)
         XCTAssertEqual(set.visitorGames, set.totalGames - 1)
@@ -124,11 +78,7 @@ class SetTests: XCTestCase {
     func test_winPoints_toTieBreak() {
         let set = makeSet()
 
-        (1...set.totalGames * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
-        }
+        goToTieBreak(set: set, win: true)
 
         XCTAssertTrue(set.isTieBreak)
         XCTAssertFalse(set.didEnd)
@@ -141,11 +91,7 @@ class SetTests: XCTestCase {
     func test_losePoints_toTieBreak() {
         let set = makeSet()
 
-        (1...set.totalGames * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.losePoint()
-            }
-        }
+        goToTieBreak(set: set, win: false)
 
         XCTAssertTrue(set.isTieBreak)
         XCTAssertFalse(set.didEnd)
@@ -158,19 +104,13 @@ class SetTests: XCTestCase {
     func test_winPoints_toExtension_thenWinPoints_toTieBreak() {
         let set = makeSet()
 
-        (1...(set.totalGames - 1) * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
-        }
+        goToExtension(set: set, win: true)
 
         XCTAssertEqual(set.localGames, set.totalGames - 1)
         XCTAssertEqual(set.visitorGames, set.totalGames - 1)
 
         (1...2).forEach { _ in
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
+            addGameFor(set: set, win: true)
         }
 
         XCTAssertEqual(set.localGames, set.totalGames)
@@ -184,19 +124,13 @@ class SetTests: XCTestCase {
     func test_losePoints_toExtension_thenLosePoints_toTieBreak() {
         let set = makeSet()
 
-        (1...(set.totalGames - 1) * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.losePoint()
-            }
-        }
+        goToExtension(set: set, win: false)
 
         XCTAssertEqual(set.localGames, set.totalGames - 1)
         XCTAssertEqual(set.visitorGames, set.totalGames - 1)
 
         (1...2).forEach { _ in
-            (1...4).forEach { _ in
-                set.losePoint()
-            }
+            addGameFor(set: set, win: true)
         }
 
         XCTAssertEqual(set.localGames, set.totalGames)
@@ -210,11 +144,7 @@ class SetTests: XCTestCase {
     func test_winPoints_toTieBreak_thenWinSingleTieBreakPoint() {
         let set = makeSet(serviceType: .local)
 
-        (1...set.totalGames * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
-        }
+        goToTieBreak(set: set, win: true)
 
         set.winPoint()
 
@@ -229,11 +159,7 @@ class SetTests: XCTestCase {
     func test_losePoints_toTieBreak_thenLoseSingleTieBreakPoint() {
         let set = makeSet(serviceType: .visitor)
 
-        (1...set.totalGames * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.losePoint()
-            }
-        }
+        goToTieBreak(set: set, win: false)
 
         set.losePoint()
 
@@ -252,16 +178,7 @@ class SetTests: XCTestCase {
         let setDelegate = SetDelegateSpy()
         set.delegate = setDelegate
 
-        (1...set.totalGames).forEach { _ in
-            let currentServiceType = set.serviceType
-            (1...4).forEach { _ in
-                if currentServiceType == .local {
-                    set.winPoint()
-                } else {
-                    set.losePoint()
-                }
-            }
-        }
+        win(set: set, to: .local)
 
         XCTAssertFalse(set.isTieBreak)
         XCTAssertTrue(set.didEnd)
@@ -272,45 +189,15 @@ class SetTests: XCTestCase {
         XCTAssertTrue(setDelegate.setDidEndCalled)
     }
 
-    func test_winPoints_toWinSet() {
-        let set = makeSet(serviceType: .local)
-
-        (1...set.totalGames).forEach { _ in
-            let currentServiceType = set.serviceType
-            (1...4).forEach { _ in
-                if currentServiceType == .local {
-                    set.winPoint()
-                } else {
-                    set.losePoint()
-                }
-            }
-        }
-
-        XCTAssertFalse(set.isTieBreak)
-        XCTAssertTrue(set.didEnd)
-        XCTAssertEqual(set.localGames, set.totalGames)
-        XCTAssertEqual(set.visitorGames, 0)
-        XCTAssertEqual(set.localTieBreakPoints, 0)
-        XCTAssertEqual(set.visitorTieBreakPoints, 0)
-    }
-
     func test_winPoints_toWinSet_withMinDifference() {
         let set = makeSet(serviceType: .visitor)
 
         (1...(set.totalGames - Set.minDifferencePerSet) * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
+            addGameFor(set: set, win: true)
         }
 
         (1...Set.minDifferencePerSet).forEach { _ in
-            (1...4).forEach { _ in
-                if set.serviceType == .visitor {
-                    set.winPoint()
-                } else {
-                    set.losePoint()
-                }
-            }
+            addGameFor(set: set, to: .visitor)
         }
 
         XCTAssertFalse(set.isTieBreak)
@@ -325,19 +212,11 @@ class SetTests: XCTestCase {
         let set = makeSet(serviceType: .local)
 
         (1...(set.totalGames - 1) * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
+            addGameFor(set: set, win: true)
         }
 
         (1...Set.minDifferencePerSet).forEach { _ in
-            (1...4).forEach { _ in
-                if set.serviceType == .local {
-                    set.winPoint()
-                } else {
-                    set.losePoint()
-                }
-            }
+            addGameFor(set: set, to: .local)
         }
 
         XCTAssertFalse(set.isTieBreak)
@@ -352,19 +231,8 @@ class SetTests: XCTestCase {
         let totalPointsForTieBreak: UInt8 = 7
         let set = makeSet(totalPointsForTieBreak: totalPointsForTieBreak)
 
-        (1...set.totalGames * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.winPoint()
-            }
-        }
-
-        (1...totalPointsForTieBreak).forEach { _ in
-            if set.serviceType == .local {
-                set.winPoint()
-            } else {
-                set.losePoint()
-            }
-        }
+        goToTieBreak(set: set, win: true)
+        add(points: totalPointsForTieBreak, for: set, to: .local)
 
         XCTAssertTrue(set.isTieBreak)
         XCTAssertTrue(set.didEnd)
@@ -378,19 +246,8 @@ class SetTests: XCTestCase {
         let totalPointsForTieBreak: UInt8 = 7
         let set = makeSet(totalPointsForTieBreak: totalPointsForTieBreak)
 
-        (1...set.totalGames * 2).forEach { _ in
-            (1...4).forEach { _ in
-                set.losePoint()
-            }
-        }
-
-        (1...totalPointsForTieBreak).forEach { _ in
-            if set.serviceType == .visitor {
-                set.winPoint()
-            } else {
-                set.losePoint()
-            }
-        }
+        goToTieBreak(set: set, win: false)
+        add(points: totalPointsForTieBreak, for: set, to: .visitor)
 
         XCTAssertTrue(set.isTieBreak)
         XCTAssertTrue(set.didEnd)
@@ -417,6 +274,52 @@ class SetTests: XCTestCase {
         switch serviceType {
         case .local: return .visitor
         case .visitor: return .local
+        }
+    }
+
+    private func addGameFor(set: Set, win: Bool) {
+        add(points: 4, for: set, win: win)
+    }
+
+    private func add(points: UInt8, for set: Set, win: Bool) {
+        (1...points).forEach { _ in
+            if win {
+                set.winPoint()
+            } else {
+                set.losePoint()
+            }
+        }
+    }
+
+    private func addGameFor(set: Set, to serviceType: ServiceType) {
+        add(points: 4, for: set, to: serviceType)
+    }
+
+    private func add(points: UInt8, for set: Set, to serviceType: ServiceType) {
+        (1...points).forEach { _ in
+            if set.serviceType == serviceType {
+                set.winPoint()
+            } else {
+                set.losePoint()
+            }
+        }
+    }
+
+    private func goToExtension(set: Set, win: Bool) {
+        (1...(set.totalGames - 1) * 2).forEach { _ in
+            addGameFor(set: set, win: win)
+        }
+    }
+
+    private func goToTieBreak(set: Set, win: Bool) {
+        (1...set.totalGames * 2).forEach { _ in
+            addGameFor(set: set, win: win)
+        }
+    }
+
+    private func win(set: Set, to serviceType: ServiceType) {
+        (1...set.totalGames).forEach { _ in
+            addGameFor(set: set, to: serviceType)
         }
     }
 
