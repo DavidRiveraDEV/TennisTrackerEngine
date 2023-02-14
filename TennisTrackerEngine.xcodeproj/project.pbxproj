@@ -8,11 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CD75903B298F502E00303CAF /* MatchSetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75903A298F502E00303CAF /* MatchSetType.swift */; };
-		CD75903C298F507E00303CAF /* MatchSetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75903A298F502E00303CAF /* MatchSetType.swift */; };
 		CD75903E298F544200303CAF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75903D298F544200303CAF /* Player.swift */; };
-		CD75903F298F546700303CAF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75903D298F544200303CAF /* Player.swift */; };
 		CD7590412991B7A200303CAF /* SetSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7590402991B7A200303CAF /* SetSummary.swift */; };
-		CD7590422991B7A200303CAF /* SetSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7590402991B7A200303CAF /* SetSummary.swift */; };
 		CD95D411298C913900037F68 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D410298C913900037F68 /* Match.swift */; };
 		CD95D413298C915B00037F68 /* MatchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D412298C915B00037F68 /* MatchOptions.swift */; };
 		CD95D415298C917D00037F68 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D414298C917D00037F68 /* Set.swift */; };
@@ -20,17 +17,10 @@
 		CD95D419298C91B700037F68 /* GamePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D418298C91B700037F68 /* GamePoint.swift */; };
 		CD95D41B298C920000037F68 /* GamePointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D41A298C920000037F68 /* GamePointTests.swift */; };
 		CD95D41D298C925D00037F68 /* MatchOptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D41C298C925D00037F68 /* MatchOptionsTests.swift */; };
-		CD95D41E298C92F200037F68 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D416298C919300037F68 /* Game.swift */; };
-		CD95D41F298C92F500037F68 /* GamePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D418298C91B700037F68 /* GamePoint.swift */; };
-		CD95D420298C92F900037F68 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D410298C913900037F68 /* Match.swift */; };
-		CD95D421298C92FC00037F68 /* MatchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D412298C915B00037F68 /* MatchOptions.swift */; };
-		CD95D422298C930300037F68 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D414298C917D00037F68 /* Set.swift */; };
 		CD95D424298C96FF00037F68 /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D423298C96FF00037F68 /* SetTests.swift */; };
 		CD95D426298C9C1200037F68 /* TieBreakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D425298C9C1200037F68 /* TieBreakTests.swift */; };
 		CD95D428298C9CE300037F68 /* TieBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D427298C9CE300037F68 /* TieBreak.swift */; };
-		CD95D429298C9D3500037F68 /* TieBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D427298C9CE300037F68 /* TieBreak.swift */; };
 		CD95D430298D864100037F68 /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D42F298D864100037F68 /* ServiceType.swift */; };
-		CD95D431298D864100037F68 /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95D42F298D864100037F68 /* ServiceType.swift */; };
 		CDB709FA29888CE200002C96 /* TennisTrackerEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB709F129888CE100002C96 /* TennisTrackerEngine.framework */; };
 		CDB70A0A29888DC000002C96 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB70A0929888DC000002C96 /* GameTests.swift */; };
 		CDB70A0C29888E3700002C96 /* MatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB70A0B29888E3700002C96 /* MatchTests.swift */; };
@@ -282,21 +272,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD95D41E298C92F200037F68 /* Game.swift in Sources */,
-				CD95D422298C930300037F68 /* Set.swift in Sources */,
-				CD95D41F298C92F500037F68 /* GamePoint.swift in Sources */,
 				CD95D426298C9C1200037F68 /* TieBreakTests.swift in Sources */,
-				CD95D429298C9D3500037F68 /* TieBreak.swift in Sources */,
-				CD7590422991B7A200303CAF /* SetSummary.swift in Sources */,
-				CD95D431298D864100037F68 /* ServiceType.swift in Sources */,
 				CDB70A0A29888DC000002C96 /* GameTests.swift in Sources */,
 				CDB70A0C29888E3700002C96 /* MatchTests.swift in Sources */,
-				CD95D421298C92FC00037F68 /* MatchOptions.swift in Sources */,
 				CD95D424298C96FF00037F68 /* SetTests.swift in Sources */,
 				CD95D41B298C920000037F68 /* GamePointTests.swift in Sources */,
-				CD95D420298C92F900037F68 /* Match.swift in Sources */,
-				CD75903C298F507E00303CAF /* MatchSetType.swift in Sources */,
-				CD75903F298F546700303CAF /* Player.swift in Sources */,
 				CD95D41D298C925D00037F68 /* MatchOptionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
