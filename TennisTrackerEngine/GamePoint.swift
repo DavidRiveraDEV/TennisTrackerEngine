@@ -19,8 +19,7 @@ extension Game {
             case .fifteen: return .thirty
             case .thirty: return .forty
             case .forty: return isAdvantage ? .advantage : .sixty
-            case .advantage: return .sixty
-            case .sixty: fatalError("sixty is the highest point")
+            case .advantage, .sixty: return .sixty
             }
         }
     }

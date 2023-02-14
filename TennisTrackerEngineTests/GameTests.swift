@@ -149,6 +149,18 @@ class GameTests: XCTestCase {
         XCTAssertTrue(game.didEnd)
     }
 
+    func test_addPointsToServer_toWin_thenAddPoint() {
+        let game = makeGame(advantageEnabled: false)
+
+        win(game: game, toServer: true)
+        game.addPointToServer()
+
+        XCTAssertEqual(game.server, .sixty)
+        XCTAssertEqual(game.receiver, .love)
+        XCTAssertFalse(game.isDeuce)
+        XCTAssertTrue(game.didEnd)
+    }
+
     func test_addPointsToReceiver_toWin_withAdvantage() {
         let game = makeGame()
 
@@ -164,6 +176,18 @@ class GameTests: XCTestCase {
         let game = makeGame()
 
         win(game: game, toServer: false)
+
+        XCTAssertEqual(game.server, .love)
+        XCTAssertEqual(game.receiver, .sixty)
+        XCTAssertFalse(game.isDeuce)
+        XCTAssertTrue(game.didEnd)
+    }
+
+    func test_addPointsToReceiver_toWin_thenAddPoint() {
+        let game = makeGame(advantageEnabled: false)
+
+        win(game: game, toServer: false)
+        game.addPointToReceiver()
 
         XCTAssertEqual(game.server, .love)
         XCTAssertEqual(game.receiver, .sixty)

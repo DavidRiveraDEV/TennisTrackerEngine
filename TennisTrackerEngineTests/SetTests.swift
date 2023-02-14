@@ -3,7 +3,7 @@ import XCTest
 
 class SetTests: XCTestCase {
 
-    func test_set_withDefaultValues() throws {
+    func test_set_withDefaultValues() {
         let serviceType: ServiceType = .local
         let advantageEnabled = true
         let totalGames: UInt8 = 6
@@ -17,6 +17,32 @@ class SetTests: XCTestCase {
         XCTAssertFalse(set.isTieBreak)
         XCTAssertFalse(set.didEnd)
         XCTAssertNil(set.delegate)
+    }
+
+    func test_set_withMinValues() {
+        let serviceType: ServiceType = .local
+        let advantageEnabled = true
+        let totalGames: UInt8 = Set.minDifferencePerSet
+
+        let set = makeSet(serviceType: serviceType, totalGames: totalGames, advantageEnabled: advantageEnabled)
+
+        XCTAssertEqual(set.serviceType, .local)
+        XCTAssertEqual(set.totalGames, totalGames)
+        XCTAssertEqual(set.localGames, 0)
+        XCTAssertEqual(set.visitorGames, 0)
+        XCTAssertFalse(set.isTieBreak)
+        XCTAssertFalse(set.didEnd)
+        XCTAssertNil(set.delegate)
+    }
+
+    func test_set_withTotalGamesLowerThanMinDifference() {
+        let serviceType: ServiceType = .local
+        let advantageEnabled = true
+        let totalGames: UInt8 = Set.minDifferencePerSet - 1
+
+        let set = makeSet(serviceType: serviceType, totalGames: totalGames, advantageEnabled: advantageEnabled)
+
+        XCTAssertEqual(set.totalGames, Set.minDifferencePerSet)
     }
 
     func test_set_withWeakDelegate() {

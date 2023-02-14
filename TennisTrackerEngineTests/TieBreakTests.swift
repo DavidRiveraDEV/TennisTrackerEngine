@@ -14,6 +14,25 @@ class TieBreakTests: XCTestCase {
         XCTAssertFalse(tieBreak.didEnd)
     }
 
+    func test_tieBreak_withMinValues() {
+        let totalPoints: UInt8 = TieBreak.minDifference
+
+        let tieBreak = TieBreak(totalPoints: totalPoints)
+
+        XCTAssertEqual(tieBreak.totalPoints, totalPoints)
+        XCTAssertEqual(tieBreak.local, 0)
+        XCTAssertEqual(tieBreak.visitor, 0)
+        XCTAssertFalse(tieBreak.didEnd)
+    }
+
+    func test_tieBreak_withTotalPointsLowerThanMinDifference() {
+        let totalPoints: UInt8 = TieBreak.minDifference - 1
+
+        let tieBreak = TieBreak(totalPoints: totalPoints)
+
+        XCTAssertEqual(tieBreak.totalPoints, TieBreak.minDifference)
+    }
+
     // MARK: - Winning single point
 
     func test_addSinglePoint_toLocal() {

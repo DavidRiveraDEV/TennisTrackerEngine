@@ -2,7 +2,7 @@ import Foundation
 
 class TieBreak {
 
-    static private let minDifference: UInt8 = 2
+    static let minDifference: UInt8 = 2
 
     let totalPoints: UInt8
 
@@ -14,19 +14,27 @@ class TieBreak {
     }
 
     init(totalPoints: UInt8) {
-        precondition(totalPoints >= TieBreak.minDifference,
-                     "totalPoints (\(totalPoints)) cannot be lower than \(TieBreak.minDifference).")
-        self.totalPoints = totalPoints
+        if totalPoints < TieBreak.minDifference {
+            debugPrint("totalPoints (\(totalPoints)) cannot be lower than \(TieBreak.minDifference). " +
+                       "totalPoints will be set to \(TieBreak.minDifference)")
+            self.totalPoints = TieBreak.minDifference
+        } else {
+            self.totalPoints = totalPoints
+        }
         self.local = 0
         self.visitor = 0
     }
 
     func addPointToLocal() {
-        local += 1
+        if !didEnd {
+            local += 1
+        }
     }
 
     func addPointToVisitor() {
-        visitor += 1
+        if !didEnd {
+            visitor += 1
+        }
     }
 
     private func didLocalWin() -> Bool {

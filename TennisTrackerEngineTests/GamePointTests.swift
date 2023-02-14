@@ -17,6 +17,9 @@ class GamePointTests: XCTestCase {
 
         point = point.nextPoint(isAdvantage: false)
         XCTAssertEqual(point, .sixty)
+
+        point = point.nextPoint(isAdvantage: false)
+        XCTAssertEqual(point, .sixty)
     }
 
     func test_pointSequence_withAdvantage() {
@@ -33,6 +36,9 @@ class GamePointTests: XCTestCase {
 
         point = point.nextPoint(isAdvantage: true)
         XCTAssertEqual(point, .advantage)
+
+        point = point.nextPoint(isAdvantage: true)
+        XCTAssertEqual(point, .sixty)
 
         point = point.nextPoint(isAdvantage: true)
         XCTAssertEqual(point, .sixty)

@@ -9,7 +9,7 @@ class Set: GameDelegate {
     static let minDifferencePerSet: UInt8 = 2
 
     private(set) var serviceType: ServiceType
-    private(set) var totalGames: UInt8
+    let totalGames: UInt8
     private var history: [ServiceType: [Game]]
     private var currentGame: Game
     private var tieBreak: TieBreak
@@ -47,10 +47,14 @@ class Set: GameDelegate {
     }
 
     init(serviceType: ServiceType, totalGames: UInt8, totalPointsForTieBreak: UInt8, advantageEnabled: Bool) {
-        precondition(totalGames >= Set.minDifferencePerSet,
-                     "Total games cannot be lower than \(Set.minDifferencePerSet)")
         self.serviceType = serviceType
-        self.totalGames = totalGames
+        if totalGames < Set.minDifferencePerSet {
+            debugPrint("totalGames cannot be lower than \(Set.minDifferencePerSet). " +
+                       "totalGames will be set to \(Set.minDifferencePerSet)")
+            self.totalGames = Set.minDifferencePerSet
+        } else {
+            self.totalGames = totalGames
+        }
         self.history = [.local: [], .visitor: []]
         self.currentGame = Game(advantageEnabled: advantageEnabled)
         self.tieBreak = TieBreak(totalPoints: totalPointsForTieBreak)
