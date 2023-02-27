@@ -13,13 +13,13 @@ extension Game {
         case advantage
         case sixty
 
-        func nextPoint(isAdvantage: Bool) -> Point {
+        mutating func next(isAdvantage: Bool) {
             switch self {
-            case .love: return .fifteen
-            case .fifteen: return .thirty
-            case .thirty: return .forty
-            case .forty: return isAdvantage ? .advantage : .sixty
-            case .advantage, .sixty: return .sixty
+            case .love: self = .fifteen
+            case .fifteen: self = .thirty
+            case .thirty: self = .forty
+            case .forty: self = isAdvantage ? .advantage : .sixty
+            case .advantage, .sixty: self = .sixty
             }
         }
     }

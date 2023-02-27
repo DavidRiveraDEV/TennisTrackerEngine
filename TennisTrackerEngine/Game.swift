@@ -31,9 +31,9 @@ class Game {
         if receiver == .advantage {
             receiver = .forty
         } else if receiver == .forty {
-            server = server.nextPoint(isAdvantage: advantageEnabled)
+            server.next(isAdvantage: advantageEnabled)
         } else {
-            server = server.nextPoint(isAdvantage: false)
+            server.next(isAdvantage: false)
         }
         checkIfGameEnded()
     }
@@ -42,9 +42,9 @@ class Game {
         if server == .advantage {
             server = .forty
         } else if server == .forty {
-            receiver = receiver.nextPoint(isAdvantage: advantageEnabled)
+            receiver.next(isAdvantage: advantageEnabled)
         } else {
-            receiver = receiver.nextPoint(isAdvantage: false)
+             receiver.next(isAdvantage: false)
         }
         checkIfGameEnded()
     }
