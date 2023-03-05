@@ -4,8 +4,6 @@ extension Game {
 
     enum Point {
 
-        typealias RawValue = UInt8
-
         case love
         case fifteen
         case thirty
