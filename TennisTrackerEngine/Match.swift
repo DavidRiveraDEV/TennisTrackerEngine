@@ -1,33 +1,33 @@
 import Foundation
 
-protocol MatchDelegate: AnyObject {
+public protocol MatchDelegate: AnyObject {
     func matchDidEnd()
 }
 
-class Match: SetDelegate {
+public final class Match: SetDelegate {
 
-    let options: Options
-    let localPlayer: Player
-    let visitorPlayer: Player
+    public let options: Options
+    public let localPlayer: Player
+    public let visitorPlayer: Player
 
     private var sets: [Set]
     private var currentSet: Set!
 
-    weak var delegate: MatchDelegate?
+    public weak var delegate: MatchDelegate?
 
-    var serviceType: ServiceType {
+    public var serviceType: ServiceType {
         return currentSet.serviceType
     }
 
-    var setSummaries: [Set.Summary] {
+    public var setSummaries: [SetSummary] {
         return getSetSummaries()
     }
 
-    var didEnd: Bool {
+    public var didEnd: Bool {
         return sets.count >= options.matchType.setsToWin
     }
 
-    init(with options: Options, localPlayer: Player, visitorPlayer: Player) {
+    public init(with options: Options, localPlayer: Player, visitorPlayer: Player) {
         self.options = options
         self.localPlayer = localPlayer
         self.visitorPlayer = visitorPlayer
@@ -35,11 +35,11 @@ class Match: SetDelegate {
         startNewSet(with: options.serviceType)
     }
 
-    func winPoint() {
+    public func winPoint() {
         currentSet.winPoint()
     }
 
-    func losePoint() {
+    public func losePoint() {
         currentSet.losePoint()
     }
 
@@ -62,14 +62,14 @@ class Match: SetDelegate {
         sets.append(currentSet)
     }
 
-    private func getSetSummaries() -> [Set.Summary] {
-        var summaries: [Set.Summary] = []
+    private func getSetSummaries() -> [SetSummary] {
+        var summaries: [SetSummary] = []
         var allSets: [Set] = sets
         if !didEnd {
             allSets.append(currentSet)
         }
         for set in allSets {
-            let summary = Set.Summary(localGames: set.localGames,
+            let summary = SetSummary(localGames: set.localGames,
                                       visitorGames: set.visitorGames,
                                       isTieBreak: set.isTieBreak,
                                       localTieBreakPoints: set.localTieBreakPoints,

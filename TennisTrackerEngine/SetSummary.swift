@@ -1,13 +1,10 @@
 import Foundation
 
-extension Set {
+public struct SetSummary {
 
-    struct Summary {
-
-        let localGames: UInt8
-        let visitorGames: UInt8
-        let isTieBreak: Bool
-        let localTieBreakPoints: UInt8
-        let visitorTieBreakPoints: UInt8
-    }
+    public let localGames: UInt8
+    public let visitorGames: UInt8
+    public let isTieBreak: Bool
+    public let localTieBreakPoints: UInt8
+    public let visitorTieBreakPoints: UInt8
 }

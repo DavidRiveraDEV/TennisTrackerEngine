@@ -101,12 +101,12 @@
 				CD95D418298C91B700037F68 /* GamePoint.swift */,
 				CD95D410298C913900037F68 /* Match.swift */,
 				CD95D412298C915B00037F68 /* MatchOptions.swift */,
-				CD95D414298C917D00037F68 /* Set.swift */,
-				CD95D427298C9CE300037F68 /* TieBreak.swift */,
-				CD95D42F298D864100037F68 /* ServiceType.swift */,
 				CD75903A298F502E00303CAF /* MatchSetType.swift */,
 				CD75903D298F544200303CAF /* Player.swift */,
+				CD95D42F298D864100037F68 /* ServiceType.swift */,
+				CD95D414298C917D00037F68 /* Set.swift */,
 				CD7590402991B7A200303CAF /* SetSummary.swift */,
+				CD95D427298C9CE300037F68 /* TieBreak.swift */,
 			);
 			path = TennisTrackerEngine;
 			sourceTree = "<group>";

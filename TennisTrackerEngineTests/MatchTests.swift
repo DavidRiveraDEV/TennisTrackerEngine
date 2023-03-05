@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import TennisTrackerEngine
+import TennisTrackerEngine
 
 class MatchTests: XCTestCase {
 

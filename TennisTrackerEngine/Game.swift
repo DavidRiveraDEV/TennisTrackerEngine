@@ -4,7 +4,7 @@ protocol GameDelegate: AnyObject {
     func gameDidEnd()
 }
 
-class Game {
+final class Game {
 
     let advantageEnabled: Bool
 

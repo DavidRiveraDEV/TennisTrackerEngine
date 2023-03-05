@@ -1,6 +1,6 @@
 import Foundation
 
-enum ServiceType {
+public enum ServiceType {
     case local
     case visitor
 

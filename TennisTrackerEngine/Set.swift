@@ -4,7 +4,7 @@ protocol SetDelegate: AnyObject {
     func setDidEnd()
 }
 
-class Set: GameDelegate {
+final class Set: GameDelegate {
 
     static let minDifferencePerSet: UInt8 = 2
 

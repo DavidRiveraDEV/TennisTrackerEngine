@@ -1,6 +1,6 @@
 import Foundation
 
-class TieBreak {
+final class TieBreak {
 
     static let minDifference: UInt8 = 2
 

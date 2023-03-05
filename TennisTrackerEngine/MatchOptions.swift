@@ -2,12 +2,25 @@ import Foundation
 
 extension Match {
 
-    struct Options {
+    public struct Options {
 
-        let matchType: Match.`Type`
-        let gamesPerSet: UInt8
-        let pointsPerTieBreak: UInt8
-        let advantage: Bool
-        let serviceType: ServiceType
+        public let matchType: Match.`Type`
+        public let gamesPerSet: UInt8
+        public let pointsPerTieBreak: UInt8
+        public let advantage: Bool
+        public let serviceType: ServiceType
+
+        public init(matchType: Match.`Type`,
+                    gamesPerSet: UInt8,
+                    pointsPerTieBreak: UInt8,
+                    advantage: Bool,
+                    serviceType: ServiceType) {
+
+            self.matchType = matchType
+            self.gamesPerSet = gamesPerSet
+            self.pointsPerTieBreak = pointsPerTieBreak
+            self.advantage = advantage
+            self.serviceType = serviceType
+        }
     }
 }

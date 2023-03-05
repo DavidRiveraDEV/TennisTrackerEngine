@@ -2,7 +2,7 @@ import Foundation
 
 extension Match {
 
-    enum `Type`: UInt8 {
+    public enum `Type`: UInt8 {
         case one = 1
         case three = 3
         case five = 5
